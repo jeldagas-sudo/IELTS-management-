@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Dashboard from './pages/Dashboard';
 import AddSession from './pages/AddSession';
@@ -8,8 +8,8 @@ import Patterns from './pages/Patterns';
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <div className="min-h-screen bg-bg">
+    <HashRouter>
+      <div className="min-h-screen bg-bg pb-20 md:pb-0">
         <Navbar />
         <main>
           <Routes>
@@ -21,6 +21,6 @@ export default function App() {
           </Routes>
         </main>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }

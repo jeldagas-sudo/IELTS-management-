@@ -68,31 +68,31 @@ export default function AddSession() {
     <div className="max-w-3xl mx-auto py-6 px-4">
       <h1 className="text-2xl font-bold mb-6">새 세션 기록</h1>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Type Selection */}
+      <form onSubmit={handleSubmit} className="space-y-5">
+        {/* Type Selection - big touch targets */}
         <div className="grid grid-cols-2 gap-3">
           <button
             type="button"
             onClick={() => setForm(prev => ({ ...prev, type: 'reading' }))}
-            className={`flex items-center justify-center gap-2 py-4 rounded-xl font-medium border-2 transition-all cursor-pointer ${
+            className={`flex items-center justify-center gap-3 py-5 rounded-xl font-semibold text-lg border-2 transition-all cursor-pointer active:scale-[0.98] ${
               form.type === 'reading'
                 ? 'border-reading bg-reading/5 text-reading'
-                : 'border-border bg-card text-text-secondary hover:border-gray-300'
+                : 'border-border bg-card text-text-secondary'
             }`}
           >
-            <BookOpen size={20} />
+            <BookOpen size={24} />
             Reading
           </button>
           <button
             type="button"
             onClick={() => setForm(prev => ({ ...prev, type: 'listening' }))}
-            className={`flex items-center justify-center gap-2 py-4 rounded-xl font-medium border-2 transition-all cursor-pointer ${
+            className={`flex items-center justify-center gap-3 py-5 rounded-xl font-semibold text-lg border-2 transition-all cursor-pointer active:scale-[0.98] ${
               form.type === 'listening'
                 ? 'border-listening bg-listening/5 text-listening'
-                : 'border-border bg-card text-text-secondary hover:border-gray-300'
+                : 'border-border bg-card text-text-secondary'
             }`}
           >
-            <Headphones size={20} />
+            <Headphones size={24} />
             Listening
           </button>
         </div>
@@ -101,69 +101,69 @@ export default function AddSession() {
         <div className="bg-card rounded-xl border border-border p-5 space-y-4 shadow-sm">
           <h2 className="font-semibold text-lg">기본 정보</h2>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-text-secondary mb-1">날짜</label>
+              <label className="block text-sm font-medium text-text-secondary mb-1.5">날짜</label>
               <input
                 type="date"
                 value={form.date}
                 onChange={(e) => setForm(prev => ({ ...prev, date: e.target.value }))}
-                className="w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary-light focus:border-transparent outline-none"
+                className="w-full px-3 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary-light focus:border-transparent outline-none"
                 required
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-text-secondary mb-1">출처 (교재/시험)</label>
+              <label className="block text-sm font-medium text-text-secondary mb-1.5">출처 (교재/시험)</label>
               <input
                 type="text"
                 value={form.source}
                 onChange={(e) => setForm(prev => ({ ...prev, source: e.target.value }))}
                 placeholder="예: Cambridge 18 Test 1"
-                className="w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary-light focus:border-transparent outline-none"
+                className="w-full px-3 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary-light focus:border-transparent outline-none"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-text-secondary mb-1">섹션/파트</label>
+            <label className="block text-sm font-medium text-text-secondary mb-1.5">섹션/파트</label>
             <input
               type="text"
               value={form.section}
               onChange={(e) => setForm(prev => ({ ...prev, section: e.target.value }))}
               placeholder="예: Passage 1, Section 1-4, Full Test"
-              className="w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary-light focus:border-transparent outline-none"
+              className="w-full px-3 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary-light focus:border-transparent outline-none"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-text-secondary mb-1">총 문항 수</label>
+              <label className="block text-sm font-medium text-text-secondary mb-1.5">총 문항 수</label>
               <input
                 type="number"
                 value={form.totalQuestions}
                 onChange={(e) => setForm(prev => ({ ...prev, totalQuestions: parseInt(e.target.value) || 0 }))}
                 min="1"
                 max="40"
-                className="w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary-light focus:border-transparent outline-none"
+                className="w-full px-3 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary-light focus:border-transparent outline-none text-center text-lg font-semibold"
                 required
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-text-secondary mb-1">오답 수</label>
+              <label className="block text-sm font-medium text-text-secondary mb-1.5">오답 수</label>
               <input
                 type="number"
                 value={form.wrongAnswers}
                 onChange={(e) => setForm(prev => ({ ...prev, wrongAnswers: parseInt(e.target.value) || 0 }))}
                 min="0"
                 max={form.totalQuestions}
-                className="w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary-light focus:border-transparent outline-none"
+                className="w-full px-3 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary-light focus:border-transparent outline-none text-center text-lg font-semibold"
                 required
               />
             </div>
           </div>
 
           {/* Live Score Preview */}
-          <div className={`rounded-lg p-4 ${form.type === 'reading' ? 'bg-reading/5' : 'bg-listening/5'}`}>
+          <div className={`rounded-xl p-5 ${form.type === 'reading' ? 'bg-reading/5 border border-reading/20' : 'bg-listening/5 border border-listening/20'}`}>
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-text-secondary">정답: {correct}/{form.totalQuestions}</p>
@@ -171,7 +171,7 @@ export default function AddSession() {
               </div>
               <div className="text-right">
                 <p className="text-sm text-text-secondary">예상 Band Score</p>
-                <p className={`text-3xl font-bold ${form.type === 'reading' ? 'text-reading' : 'text-listening'}`}>
+                <p className={`text-4xl font-bold ${form.type === 'reading' ? 'text-reading' : 'text-listening'}`}>
                   {previewBand}
                 </p>
               </div>
@@ -186,15 +186,15 @@ export default function AddSession() {
             <button
               type="button"
               onClick={addError}
-              className="flex items-center gap-1 text-sm bg-primary-light text-white px-3 py-1.5 rounded-lg hover:bg-primary transition-colors cursor-pointer"
+              className="flex items-center gap-1.5 bg-primary-light text-white px-4 py-2.5 rounded-lg active:bg-primary transition-colors cursor-pointer text-sm font-medium"
             >
-              <Plus size={14} />
+              <Plus size={16} />
               오답 추가
             </button>
           </div>
 
           {form.errors.length === 0 && (
-            <p className="text-text-secondary text-sm text-center py-6">
+            <p className="text-text-secondary text-sm text-center py-8">
               오답을 추가하여 상세 분석을 기록하세요.<br />
               패러프레이즈 분석, 틀린 이유 등을 추적할 수 있습니다.
             </p>
@@ -202,35 +202,35 @@ export default function AddSession() {
 
           <div className="space-y-4">
             {form.errors.map((error, index) => (
-              <div key={error.id} className="border border-border rounded-lg p-4 bg-gray-50/50 space-y-3">
+              <div key={error.id} className="border border-border rounded-xl p-4 bg-gray-50/50 space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium text-text-secondary">오답 #{index + 1}</span>
+                  <span className="text-sm font-semibold text-text-secondary">오답 #{index + 1}</span>
                   <button
                     type="button"
                     onClick={() => removeError(error.id)}
-                    className="text-danger hover:text-red-700 cursor-pointer bg-transparent border-none"
+                    className="text-danger p-2 rounded-lg active:bg-red-50 cursor-pointer bg-transparent border-none"
                   >
-                    <Trash2 size={16} />
+                    <Trash2 size={18} />
                   </button>
                 </div>
 
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <div>
-                    <label className="block text-xs text-text-secondary mb-1">문제 번호</label>
+                    <label className="block text-xs font-medium text-text-secondary mb-1">문제 번호</label>
                     <input
                       type="text"
                       value={error.questionNumber}
                       onChange={(e) => updateError(error.id, 'questionNumber', e.target.value)}
                       placeholder="Q.1"
-                      className="w-full px-2 py-1.5 border border-border rounded text-sm focus:ring-2 focus:ring-primary-light focus:border-transparent outline-none"
+                      className="w-full px-3 py-2.5 border border-border rounded-lg focus:ring-2 focus:ring-primary-light focus:border-transparent outline-none"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs text-text-secondary mb-1">틀린 이유</label>
+                    <label className="block text-xs font-medium text-text-secondary mb-1">틀린 이유</label>
                     <select
                       value={error.category}
                       onChange={(e) => updateError(error.id, 'category', e.target.value)}
-                      className="w-full px-2 py-1.5 border border-border rounded text-sm focus:ring-2 focus:ring-primary-light focus:border-transparent outline-none bg-white"
+                      className="w-full px-3 py-2.5 border border-border rounded-lg focus:ring-2 focus:ring-primary-light focus:border-transparent outline-none bg-white"
                     >
                       <option value="">선택...</option>
                       {ERROR_CATEGORIES.map(cat => (
@@ -239,11 +239,11 @@ export default function AddSession() {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs text-text-secondary mb-1">문제 유형</label>
+                    <label className="block text-xs font-medium text-text-secondary mb-1">문제 유형</label>
                     <select
                       value={error.questionType}
                       onChange={(e) => updateError(error.id, 'questionType', e.target.value)}
-                      className="w-full px-2 py-2 border border-border rounded text-sm focus:ring-2 focus:ring-primary-light focus:border-transparent outline-none bg-white"
+                      className="w-full px-3 py-2.5 border border-border rounded-lg focus:ring-2 focus:ring-primary-light focus:border-transparent outline-none bg-white"
                     >
                       <option value="">선택...</option>
                       {questionTypes.map(qt => (
@@ -255,29 +255,29 @@ export default function AddSession() {
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs text-text-secondary mb-1">내 답</label>
+                    <label className="block text-xs font-medium text-text-secondary mb-1">내 답</label>
                     <input
                       type="text"
                       value={error.myAnswer}
                       onChange={(e) => updateError(error.id, 'myAnswer', e.target.value)}
-                      className="w-full px-2 py-1.5 border border-border rounded text-sm focus:ring-2 focus:ring-primary-light focus:border-transparent outline-none"
+                      className="w-full px-3 py-2.5 border border-border rounded-lg focus:ring-2 focus:ring-primary-light focus:border-transparent outline-none"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs text-text-secondary mb-1">정답</label>
+                    <label className="block text-xs font-medium text-text-secondary mb-1">정답</label>
                     <input
                       type="text"
                       value={error.correctAnswer}
                       onChange={(e) => updateError(error.id, 'correctAnswer', e.target.value)}
-                      className="w-full px-2 py-1.5 border border-border rounded text-sm focus:ring-2 focus:ring-primary-light focus:border-transparent outline-none"
+                      className="w-full px-3 py-2.5 border border-border rounded-lg focus:ring-2 focus:ring-primary-light focus:border-transparent outline-none"
                     />
                   </div>
                 </div>
 
                 {/* Paraphrase Section */}
-                <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
-                  <p className="text-xs font-medium text-amber-700 mb-2">패러프레이즈 분석</p>
-                  <div className="grid grid-cols-2 gap-3">
+                <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
+                  <p className="text-xs font-semibold text-amber-700 mb-2">패러프레이즈 분석</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                       <label className="block text-xs text-text-secondary mb-1">원문 표현</label>
                       <input
@@ -285,7 +285,7 @@ export default function AddSession() {
                         value={error.originalText}
                         onChange={(e) => updateError(error.id, 'originalText', e.target.value)}
                         placeholder="지문의 원래 표현"
-                        className="w-full px-2 py-1.5 border border-amber-200 rounded text-sm focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none"
+                        className="w-full px-3 py-2.5 border border-amber-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none"
                       />
                     </div>
                     <div>
@@ -295,20 +295,20 @@ export default function AddSession() {
                         value={error.paraphrasedText}
                         onChange={(e) => updateError(error.id, 'paraphrasedText', e.target.value)}
                         placeholder="문제에서 변형된 표현"
-                        className="w-full px-2 py-1.5 border border-amber-200 rounded text-sm focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none"
+                        className="w-full px-3 py-2.5 border border-amber-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-transparent outline-none"
                       />
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs text-text-secondary mb-1">메모/설명</label>
+                  <label className="block text-xs font-medium text-text-secondary mb-1">메모/설명</label>
                   <textarea
                     value={error.explanation}
                     onChange={(e) => updateError(error.id, 'explanation', e.target.value)}
                     placeholder="왜 틀렸는지 상세 설명..."
                     rows={2}
-                    className="w-full px-2 py-1.5 border border-border rounded text-sm focus:ring-2 focus:ring-primary-light focus:border-transparent outline-none resize-none"
+                    className="w-full px-3 py-2.5 border border-border rounded-lg focus:ring-2 focus:ring-primary-light focus:border-transparent outline-none resize-none"
                   />
                 </div>
               </div>
@@ -324,16 +324,16 @@ export default function AddSession() {
             onChange={(e) => setForm(prev => ({ ...prev, notes: e.target.value }))}
             placeholder="오늘의 컨디션, 느낀 점, 개선할 점..."
             rows={3}
-            className="w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary-light focus:border-transparent outline-none resize-none"
+            className="w-full px-3 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary-light focus:border-transparent outline-none resize-none"
           />
         </div>
 
         {/* Submit */}
         <button
           type="submit"
-          className="w-full flex items-center justify-center gap-2 bg-primary text-white py-3.5 rounded-xl font-medium hover:bg-primary-dark transition-colors cursor-pointer text-lg border-none"
+          className="w-full flex items-center justify-center gap-2 bg-primary text-white py-4 rounded-xl font-semibold active:bg-primary-dark transition-colors cursor-pointer text-lg border-none"
         >
-          <Save size={20} />
+          <Save size={22} />
           세션 저장
         </button>
       </form>
