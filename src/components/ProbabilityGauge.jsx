@@ -1,8 +1,8 @@
 export default function ProbabilityGauge({ probability, label, confidence }) {
   const getColor = (p) => {
-    if (p >= 70) return { ring: '#10b981', bg: '#d1fae5', text: 'text-success' };
-    if (p >= 40) return { ring: '#f59e0b', bg: '#fef3c7', text: 'text-warning' };
-    return { ring: '#ef4444', bg: '#fee2e2', text: 'text-danger' };
+    if (p >= 70) return { ring: '#6b8b67', bg: '#dce8d8', text: 'text-success' };
+    if (p >= 40) return { ring: '#d4af37', bg: '#f3e8be', text: 'text-accent' };
+    return { ring: '#a66a5b', bg: '#ead9d4', text: 'text-danger' };
   };
 
   const { ring, bg, text } = getColor(probability);
@@ -27,11 +27,11 @@ export default function ProbabilityGauge({ probability, label, confidence }) {
             strokeLinecap="round"
             strokeDasharray={circumference}
             strokeDashoffset={offset}
-            style={{ transition: 'stroke-dashoffset 1s ease-in-out' }}
+            style={{ transition: 'stroke-dashoffset 1100ms cubic-bezier(0.22, 1, 0.36, 1)' }}
           />
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className={`text-3xl font-bold ${text}`}>{probability}%</span>
+          <span className={`text-3xl font-semibold ${text}`}>{probability}%</span>
           <span className="text-xs text-text-secondary">달성 확률</span>
         </div>
       </div>
