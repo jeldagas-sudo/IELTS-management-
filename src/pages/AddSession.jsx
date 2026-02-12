@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Save, Plus, Trash2, BookOpen, Headphones } from 'lucide-react';
+import { useNavigate, Link } from 'react-router-dom';
+import { Save, Plus, Trash2, BookOpen, Headphones, FileText } from 'lucide-react';
 import { format } from 'date-fns';
 import { addSession } from '../utils/storage';
 import { calculateSessionBand, ERROR_CATEGORIES, READING_QUESTION_TYPES, LISTENING_QUESTION_TYPES } from '../utils/scoring';
@@ -66,7 +66,22 @@ export default function AddSession() {
 
   return (
     <div className="max-w-3xl mx-auto py-6 px-4">
-      <h1 className="text-2xl font-bold mb-6">새 세션 기록</h1>
+      <h1 className="text-2xl font-bold mb-4">새 세션 기록</h1>
+
+      {/* Reading Full Test Link */}
+      <Link
+        to="/add-reading-test"
+        className="flex items-center gap-3 bg-reading/5 border border-reading/20 rounded-xl p-4 mb-5 no-underline hover:bg-reading/10 transition-colors"
+      >
+        <div className="p-2 rounded-lg bg-reading/10">
+          <FileText size={20} className="text-reading" />
+        </div>
+        <div className="flex-1">
+          <p className="font-medium text-text">Reading 풀 테스트 모드</p>
+          <p className="text-xs text-text-secondary">Passage 1, 2, 3을 한번에 기록하고 전체 Band Score 확인</p>
+        </div>
+        <span className="text-reading text-sm font-medium">→</span>
+      </Link>
 
       <form onSubmit={handleSubmit} className="space-y-5">
         {/* Type Selection - big touch targets */}

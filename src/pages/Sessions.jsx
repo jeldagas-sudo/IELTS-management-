@@ -108,6 +108,24 @@ export default function Sessions() {
               {/* Expanded Details */}
               {expandedId === session.id && (
                 <div className="border-t border-border p-4 bg-gray-50/50 space-y-4">
+                  {/* Passage breakdown for full reading tests */}
+                  {session.passages && session.passages.length > 0 && (
+                    <div>
+                      <p className="text-xs font-medium text-text-secondary mb-2">패시지별 결과</p>
+                      <div className="grid grid-cols-3 gap-2">
+                        {session.passages.map((p, pIdx) => (
+                          <div key={pIdx} className="bg-white rounded-lg border border-border p-3 text-center">
+                            <p className="text-xs text-text-secondary">Passage {p.passage}</p>
+                            <p className="text-lg font-bold text-reading">{p.correct}/{p.questions}</p>
+                            <p className="text-xs text-text-secondary">
+                              {p.questions > 0 ? Math.round((p.correct / p.questions) * 100) : 0}%
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                   {session.notes && (
                     <div>
                       <p className="text-xs font-medium text-text-secondary mb-1">메모</p>

@@ -48,3 +48,30 @@ export function getSessionsByType(type) {
 export function getSessionsSorted() {
   return getSessions().sort((a, b) => new Date(a.date) - new Date(b.date));
 }
+
+// Export all data as a JSON-serializable object
+export function exportAllData() {
+  return {
+    version: '1.0',
+    exportedAt: new Date().toISOString(),
+    sessions: getSessions(),
+  };
+}
+
+// Import data from a JSON object
+export function importData(data, mode = 'merge') {
+  const sessions = data.sessions || data;
+  if (!Array.isArray(sessions)) throw new Error('Invalid data format');
+
+  if (mode === 'replace') {
+    saveSessions(sessions);
+    return { added: sessions.length, skipped: 0 };
+  }
+
+  // Merge mode: skip duplicates by id
+  const existing = getSessions();
+  const existingIds = new Set(existing.map(s => s.id));
+  const newSessions = sessions.filter(s => !existingIds.has(s.id));
+  saveSessions([...existing, ...newSessions]);
+  return { added: newSessions.length, skipped: sessions.length - newSessions.length };
+}

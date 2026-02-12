@@ -1,6 +1,6 @@
 import { createElement } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { BarChart3, PlusCircle, TrendingUp, AlertTriangle, Home } from 'lucide-react';
+import { BarChart3, PlusCircle, TrendingUp, AlertTriangle, Home, Database } from 'lucide-react';
 
 const links = [
   { to: '/', icon: Home, label: '대시보드' },
@@ -8,6 +8,10 @@ const links = [
   { to: '/add', icon: PlusCircle, label: '추가', isMain: true },
   { to: '/analysis', icon: TrendingUp, label: '분석' },
   { to: '/patterns', icon: AlertTriangle, label: '패턴' },
+];
+
+const desktopExtraLinks = [
+  { to: '/data', icon: Database, label: '데이터' },
 ];
 
 export default function Navbar() {
@@ -25,7 +29,7 @@ export default function Navbar() {
               <span className="text-sm text-text-secondary pb-0.5">Progress Tracker</span>
             </Link>
             <div className="flex gap-1">
-              {links.map(({ to, icon, label }) => (
+              {[...links, ...desktopExtraLinks].map(({ to, icon, label }) => (
                 <Link
                   key={to}
                   to={to}
@@ -48,7 +52,7 @@ export default function Navbar() {
         style={{ backgroundColor: 'rgba(248, 247, 245, 0.96)', paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
       >
         <div className="flex items-end justify-around px-2 pt-1.5 pb-1.5">
-          {links.map(({ to, icon, label, isMain }) => {
+          {[...links, ...desktopExtraLinks].map(({ to, icon, label, isMain }) => {
             const active = location.pathname === to;
 
             if (isMain) {
